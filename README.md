@@ -59,41 +59,7 @@
                 "eid": "00011",
                 "pno": 10,
                 "net": 1,
-                "sn": "www.yzb.com",
-                "url": "/login",
-                "ref": "/register",
-                "ct": "1486915200000",
-                "lon": 89.09,
-                "lat": 88.09,
-                "data": {
-                    "rec": "2.12.20.jn.zk"
-                },
-                "sig": "2160ed0e47607e1e53fd5aaed41f7e73"
-            },{
-                "typ": "e",
-                "pid": "00011",
-                "ppid": "00010",
-                "eid": "00011",
-                "pno": 10,
-                "net": 1,
-                "sn": "www.yzb.com",
-                "url": "/login",
-                "ref": "/register",
-                "ct": "1486915200000",
-                "lon": 89.09,
-                "lat": 88.09,
-                "data": {
-                    "rec": "2.12.20.jn.zk"
-                },
-                "sig": "2160ed0e47607e1e53fd5aaed41f7e73"
-            },{
-                "typ": "e",
-                "pid": "00011",
-                "ppid": "00010",
-                "eid": "00011",
-                "pno": 10,
-                "net": 1,
-                "sn": "www.yzb.com",
+                "sn": "www.xxx.com",
                 "url": "/login",
                 "ref": "/register",
                 "ct": "1486915200000",
@@ -104,7 +70,6 @@
                 },
                 "sig": "2160ed0e47607e1e53fd5aaed41f7e73"
             }
-             
         ]
     }
 ### Kafka接受json 格式 message
