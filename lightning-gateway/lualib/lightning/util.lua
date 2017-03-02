@@ -31,6 +31,8 @@ local DID_LENGTH=_config.DID_LENGTH          --- did 长度
 local TIMESTAMP_LENGTH=_config.TIMESTAMP_LENGTH   --- 时间戳长度
 local DST_ANDROID=_config.DST_ANDROID        --- 设备系统类型 android
 local DST_IOS=_config.DST_IOS                --- 设备系统类型 ios
+local MD5_LIST_APP = _config.MD5_LIST_APP
+local MD5_LIST_WEB_H5 = _config.MD5_LIST_WEB_H5
 
 local _Util = {}
 --- 获得服务端时间
@@ -178,14 +180,14 @@ function _Util.messagepack_to_common(cm)
     if  clt then
         commom["clt"] = clt
     end
-    local ak  = cm[3]
-    if  ak then
-        commom["ak"] = ak
+    local pf  = cm[3]
+    if  pf then
+        commom["pf"] = pf
     end
 
-    local bid  = cm[4]
-    if  bid then
-        commom["bid"] = bid
+    local tpc  = cm[4]
+    if  tpc then
+        commom["tpc"] = tpc
     end
     local did  = cm[5]
     if  did then
@@ -233,10 +235,6 @@ function _Util.messagepack_to_common(cm)
     if  fr then
         commom["fr"] = fr
     end
-    local pk  = cm[15]
-    if pk then
-        commom["pk"] = pk
-    end
     local scr  = cm[16]
     if scr then
         commom["scr"] = scr
@@ -265,11 +263,38 @@ function _Util.get_cs()
     cs = ngx.unescape_uri(cs) --- url param decode
     return cs
 end
+function _Util.get_app_md5_sig(common_param,log_param)
+    local va = ""
+    for _index,data in ipair(MD5_LIST_APP) do
+        local d = common_param[data]
+        if not d then
+            d = log_param[data]
+        end
+        va = va..data
+    end
+
+    va = MD5_KEY .. va .. MD5_KEY
+    return md5(va)
+end
+
+function _Util.get_web_h5_md5_sig(common_param,log_param)
+    local va = ""
+    for _index,data in ipair(MD5_LIST_APP) do
+        local d = common_param[data]
+        if not d then
+            d = log_param[data]
+        end
+        va = va..data
+    end
+
+    va = MD5_KEY .. va .. MD5_KEY
+    return md5(va)
+end
 
 --- 检查web h5 log 参数
 function _Util.check_webh5_log_param(common_param,log_param)
     if log_param then
-        local bid = common_param["bid"]
+        local tpc = common_param["tpc"]
         local fr = common_param["fr"]
         local typ = log_param["typ"]
         if not typ then
@@ -297,8 +322,7 @@ function _Util.check_webh5_log_param(common_param,log_param)
         if not signature then
             return false
         end
-        local va = MD5_KEY .. fr .. ct .. bid .. url .. eid .. MD5_KEY
-        local s_signature = md5(va)
+        local s_signature = _Util.get_web_h5_md5_sig(common_param,log_param)
         if s_signature ~= signature then
             logger(ERR, "web h5 signature err -> " .. signature .. ",s_signature->" .. s_signature)
             return false
@@ -308,10 +332,12 @@ function _Util.check_webh5_log_param(common_param,log_param)
         return false
     end
 end
+
+
 ---- 检查app log 参数
 function _Util.check_app_log_param(common_param,log_param)
     if log_param then
-        local bid = common_param["bid"]
+        local tpc = common_param["tpc"]
         local did = common_param["did"]
         local fr = common_param["fr"]
         local typ = log_param["typ"]
@@ -342,8 +368,7 @@ function _Util.check_app_log_param(common_param,log_param)
             logger(ERR, "app sig nil ")
             return false
         end
-        local va = MD5_KEY .. fr .. ct .. bid .. did .. eid .. MD5_KEY
-        local s_signature = md5(va)
+        local s_signature = _Util.get_app_md5_sig(common_param,log_param)
         if signature ~= s_signature then
             logger(ERR, "app signature err -> " .. signature .. ",s_signature->" .. s_signature)
             return false
@@ -408,11 +433,6 @@ function _Util.check_app_common_param(common_param)
         logger(ERR, "app apv  nil \n")
         return false
     end
-    local pk = common_param["pk"]
-    if not pk then
-        logger(ERR, "app pk  nil \n")
-        return false
-    end
     local scr = common_param["scr"]
     if not scr then
         logger(ERR, "app scr  nil \n")
@@ -439,21 +459,18 @@ function _Util.check_common_param(common_param)
             logger(ERR, "common clt  err "..clt)
             return false
         end
-        local ak = common_param["ak"]
-        if not ak then
-            logger(ERR, "common ak  nil \n")
+        local pf = common_param["pf"]
+        if not pf then
+            logger(ERR, "common pf  nil \n")
             return false
         end
 
-        local bid = common_param["bid"]
-        if not bid then
-            logger(ERR, "common bid  nil \n ")
+        local tpc = common_param["tpc"]
+        if not tpc then
+            logger(ERR, "common tpc  nil \n ")
             return false
         end
-        if bid~= "yzb" and bid~="xkx" and bid~="mp" then
-            logger(ERR, "common bid  err "..bid)
-            return false
-        end
+        ---TODO:检查tpc 的值
         local lag = common_param["lag"]
         if not lag then
             logger(ERR, "common lag  nil \n")
@@ -578,8 +595,8 @@ end
 ---公共参数添加单条log 最后发送给kafka
 function _Util.common_param_to_log(common_param,log)
     log["clt"]  = common_param["clt"]
-    log["ak"]  = common_param["ak"]
-    log["bid"]  = common_param["bid"]
+    log["pf"]  = common_param["pf"]
+    log["tpc"]  = common_param["tpc"]
     log["ver"]  = common_param["ver"]
     log["did"]  = common_param["did"]
     log["amd"]  = common_param["amd"]
@@ -591,7 +608,6 @@ function _Util.common_param_to_log(common_param,log)
     log["apv"]  = common_param["apv"]
     log["lag"]  = common_param["lag"]
     log["fr"]  = common_param["fr"]
-    log["pk"]  = common_param["pk"]
     log["scr"]  = common_param["scr"]
     log["lc"]  = common_param["lc"]
 end

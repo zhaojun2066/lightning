@@ -16,15 +16,10 @@ exceed the batch_num, or every flush_time flush the buffer.
 _Config={
     --- kafka broker list
     BROKER_LIST = {
-        { host = "10.10.20.91", port = 9092 },
-        { host = "10.10.20.92", port = 9092 },
-        { host = "10.10.20.913", port = 9092 },
+        { host = "", port = 9092 },
+        { host = "", port = 9092 },
+        { host = "", port = 9092 },
     },
-   --[[ BROKER_LIST = {
-        { host = "10.45.145.117", port = 9092 },
-        { host = "10.25.132.20", port = 9092 },
-        { host = "10.25.132.41", port = 9092 },
-    },]]
     --- kafka config  one ngx worker one kafka client or producer instance
     KAFKA_CONFIG= {
         producer_type = "async",            ---异步
@@ -41,10 +36,12 @@ _Config={
     MD5_KEY="oifsoifosdfsdifodsfs",
     ---过滤的爬虫网站
     SPIDER_REG="Googlebot|Mediapartners-Google|Adsbot-Google|Feedfetcher-Google|Yahoo! Slurp China|Yahoo! Slurp|bingbot/2.0|msnbot/1.0|Baiduspider|Sogou web spider/4.0|Sogou inst spider/4.0|360Spider|qihoobot|YoudaoBot|Sosospider|iaskspider",
-    DID_LENGTH=32,                          --- did 长度
-    TIMESTAMP_LENGTH=13,                    --- 时间戳长度
+    DID_LENGTH=32,                          --- did 长度限制
+    TIMESTAMP_LENGTH=13,                    --- 时间戳长度限制
     DST_ANDROID="1",                        --- 设备android
-    DST_IOS="2"                             --- 设备IOS
+    DST_IOS="2",                            --- 设备IOS
+    MD5_LIST_APP={"fr","ct","tpc","did","eid"},  --- app md5生成签名的字段拼接顺序
+    MD5_LIST_WEB_H5={"fr","ct","tpc","url","eid"}  --- web h5 md5生成签名的字段拼接顺序
 
 }
 

@@ -23,7 +23,7 @@ if cs_msg then
     local kafka_producer=_producer:new(BROKER_LIST, KAFKA_CONFIG)
     for _index,v in ipairs(json) do
         if v then
-            local topic = v["bid"]
+            local topic = v["tpc"]
             local key = v["sig"] --ngx.md5(ngx.time()..v["sig"])
             local data = json_encode(v)
             ---logger(ERR,"D-: "..data)
