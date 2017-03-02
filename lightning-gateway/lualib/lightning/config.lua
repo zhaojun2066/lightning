@@ -38,7 +38,7 @@ _Config={
         batch_num=500                       --- 批量大小，当队列内达到500时进行一个send 到kakfa
     },
     --- MD5 key
-    MD5_KEY="e2kU@-%K1a)0)+!*ZJ",
+    MD5_KEY="oifsoifosdfsdifodsfs",
     ---过滤的爬虫网站
     SPIDER_REG="Googlebot|Mediapartners-Google|Adsbot-Google|Feedfetcher-Google|Yahoo! Slurp China|Yahoo! Slurp|bingbot/2.0|msnbot/1.0|Baiduspider|Sogou web spider/4.0|Sogou inst spider/4.0|360Spider|qihoobot|YoudaoBot|Sosospider|iaskspider",
     DID_LENGTH=32,                          --- did 长度
