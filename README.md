@@ -1,5 +1,4 @@
 # lightning
-=======================
 服务收集app web h5 埋点信息，openresty 实现
 支持文件上传/zlib压缩/messagepack
 
@@ -39,11 +38,11 @@
         sh bin/stop.sh  
 ### 埋点字段  
      
-字段 | 来源 | 是否必填  | 说明  
-----|------|----|----
-req | 服务端  | 是  | 请求到达时间
-ua | 服务端  | 是  | user agent
-ip | 服务端  | 是  | client ip
+    字段 | 来源 | 是否必填  | 说明  
+    ----|------|----|----
+    req | 服务端  | 是  | 请求到达时间
+    ua | 服务端  | 是  | user agent
+    ip | 服务端  | 是  | client ip
     clt | 客户端  | 是  | 终端类型 [app web h5]
     pf | 客户端  | 是  |  平台类型，哪个平台在调用数据接口
     typ | 客户端  | 是  | 事件类型 p: 进入页面事件，e: 页面内事件（点击曝光等）
@@ -77,8 +76,8 @@ ip | 服务端  | 是  | client ip
     sig | 客户端  | 是  | 签名
 
 
-### 埋点信息    
-    {
+### 埋点信息  
+        {
         "cm": {
             "ver": "2", //日志版本
             "clt": "app",//终端类型 app web h5
@@ -103,38 +102,38 @@ ip | 服务端  | 是  | client ip
                 "pid": "00011",//页面id，和进入页面的p事件 eid 一样
                 "ppid": "00010",//父页面id
                 "eid": "00011",// 事件id
-                "pno": "10",//页面访问深度
-                "net": "1",//网络类型2－4  : 2-4g ，5:wifi ，1：其他
-                "sn": "www.xxx.com",//请求数据的域名
-                "url": "/login",//当前url
-                "ref": "/register",//refer url
-                "ct": "1486915200000",//client 时间戳
-                "lon": 89.09, //经纬度
-                "lat": 88.09,
-                "data": {// 业务数据 由服务端传递给client 进行埋点
-                    "rec": "2.12.20.jn.zk"
-                },
-                "sig": "2160ed0e47607e1e53fd5aaed41f7e73"//生成的签名
-            },{
-                "typ": "e",
-                "pid": "00011",
-                "ppid": "00010",
-                "eid": "00011",
-                "pno": 10,
-                "net": 1,
-                "sn": "www.xxx.com",
-                "url": "/login",
-                "ref": "/register",
-                "ct": "1486915200000",
-                "lon": 89.09,
-                "lat": 88.09,
-                "data": {
-                    "rec": "2.12.20.jn.zk"
-                },
-                "sig": "2160ed0e47607e1e53fd5aaed41f7e73"
+            "pno": "10",//页面访问深度
+            "net": "1",//网络类型2－4  : 2-4g ，5:wifi ，1：其他
+            "sn": "www.xxx.com",//请求数据的域名
+            "url": "/login",//当前url
+            "ref": "/register",//refer url
+            "ct": "1486915200000",//client 时间戳
+            "lon": 89.09, //经纬度
+            "lat": 88.09,
+            "data": {// 业务数据 由服务端传递给client 进行埋点
+                "rec": "2.12.20.jn.zk"
+            },
+            "sig": "2160ed0e47607e1e53fd5aaed41f7e73"//生成的签名
+        },{
+            "typ": "e",
+            "pid": "00011",
+            "ppid": "00010",
+                        "eid": "00011",
+                        "pno": 10,
+                        "net": 1,
+                        "sn": "www.xxx.com",
+                        "url": "/login",
+                        "ref": "/register",
+                        "ct": "1486915200000",
+                        "lon": 89.09,
+                        "lat": 88.09,
+                        "data": {
+                            "rec": "2.12.20.jn.zk"
+                        },
+                        "sig": "2160ed0e47607e1e53fd5aaed41f7e73"
+                    }
+                ]
             }
-        ]
-    }
     
 ### Kafka接受json 格式 message
     {
