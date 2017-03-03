@@ -38,38 +38,36 @@
         sh bin/stop.sh 
         
 ### 修改相关配置  
-        `
-        lightning-gataway/lualib/lightning/config.lua 
-        _Config={
-                --- kafka broker list
-                BROKER_LIST = { 
-                    { host = "", port = 9092 }, 
-                    { host = "", port = 9092 }, 
-                    { host = "", port = 9092 }, 
-                }, 
-                --- kafka config  one ngx worker one kafka client or producer instance 
-                KAFKA_CONFIG= { 
-                    producer_type = "async",            ---异步 
-                    socket_timeout = 6000,              --- request_timeout 
-                    max_retry = 2,                      --- 重试次数 
-                    refresh_interval = 600 * 1000,      ---auto refresh the metadata in milliseconds. 
-                    keepalive_timeout = 600 * 1000,     ---connection timeout 10 min 
-                    keepalive_size = 40,                --- pool size for each nginx worker 
-                    max_buffering = 1000000,             --- queue size 
-                    flush_time=100,                     --- send kafka XX ms 
-                    batch_num=500                       --- 批量大小，当队列内达到500时进行一个send 到kakfa 
-                },
-                --- MD5 key 
-                MD5_KEY="", 
-                SPIDER_REG="",                           ---过滤的爬虫网站  
-                DID_LENGTH=32,                          --- did 长度限制 
-                TIMESTAMP_LENGTH=13,                    --- 时间戳长度限制 
-                DST_ANDROID="1",                        --- 设备android 
-                DST_IOS="2",                            --- 设备IOS 
-                MD5_LIST_APP={"fr","ct","tpc","did","eid"},  --- app md5生成签名的字段拼接顺序 
-                MD5_LIST_WEB_H5={"fr","ct","tpc","url","eid"}  --- web h5 md5生成签名的字段拼接顺序 
-            } 
-       `
+           lightning-gataway/lualib/lightning/config.lua 
+            _Config={
+                    --- kafka broker list
+                    BROKER_LIST = { 
+                        { host = "", port = 9092 }, 
+                        { host = "", port = 9092 }, 
+                        { host = "", port = 9092 }, 
+                    }, 
+                    --- kafka config  one ngx worker one kafka client or producer instance 
+                    KAFKA_CONFIG= { 
+                        producer_type = "async",            ---异步 
+                        socket_timeout = 6000,              --- request_timeout 
+                        max_retry = 2,                      --- 重试次数 
+                        refresh_interval = 600 * 1000,      ---auto refresh the metadata in milliseconds. 
+                        keepalive_timeout = 600 * 1000,     ---connection timeout 10 min 
+                        keepalive_size = 40,                --- pool size for each nginx worker 
+                        max_buffering = 1000000,             --- queue size 
+                        flush_time=100,                     --- send kafka XX ms 
+                        batch_num=500                       --- 批量大小，当队列内达到500时进行一个send 到kakfa 
+                    },
+                    --- MD5 key 
+                    MD5_KEY="", 
+                    SPIDER_REG="",                           ---过滤的爬虫网站  
+                    DID_LENGTH=32,                          --- did 长度限制 
+                    TIMESTAMP_LENGTH=13,                    --- 时间戳长度限制 
+                    DST_ANDROID="1",                        --- 设备android 
+                    DST_IOS="2",                            --- 设备IOS 
+                    MD5_LIST_APP={"fr","ct","tpc","did","eid"},  --- app md5生成签名的字段拼接顺序 
+                    MD5_LIST_WEB_H5={"fr","ct","tpc","url","eid"}  --- web h5 md5生成签名的字段拼接顺序 
+                } 
              
 ### 埋点字段  
      
