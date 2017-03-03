@@ -24,6 +24,20 @@
 [lua-resty-upload](https://github.com/openresty/lua-resty-upload)
 
 [lua-zlib](https://github.com/brimworks/lua-zlib) 
+
+### 运行
+    修改bin/start.sh 
+    OPENRESTY_INSTALL_PATH 为你的openresty 安装路径
+    修改配置文件路径为你nginx.conf的路径
+    修改bin/stop.sh 同上
+    
+    修改conf/nginx.conf 里面加载lua的路径指向到该项目路径
+    
+    启动重启：
+    sh bin/star.tsh
+    停止：
+    sh bin/stop.sh
+    
 ### 埋点信息
     {
         "cm": {
