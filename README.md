@@ -76,7 +76,7 @@ url | 客户端  | 是  | 请求的url web h5 必须传递
 refer | 客户端  | 是  | 请求的refer url web h5 必须传递
 sig | 客户端  | 是  | 签名
     
-### 埋点信息 json
+### 埋点信息 json 
     {
         "cm": {
             "ver": "2", //日志版本
