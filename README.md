@@ -13,7 +13,17 @@
         cd ngx_openresty-{Version} 
         ./configure --prefix=/usr/local/openresty   
         make    
-        make install  
+        make install 
+### 依赖       
+[lua-resty-jit-uuid](https://github.com/thibaultcha/lua-resty-jit-uuid)
+
+[lua-resty-cookie](https://github.com/cloudflare/lua-resty-cookie)
+
+[lua-MessagePack](https://github.com/fperrad/lua-MessagePack)
+
+[lua-resty-upload](https://github.com/openresty/lua-resty-upload)
+
+[lua-zlib](https://github.com/brimworks/lua-zlib) 
 ### 埋点信息
     {
         "cm": {
