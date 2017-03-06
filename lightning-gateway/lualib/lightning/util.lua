@@ -518,7 +518,7 @@ function _Util.set_cookie()
                 key = "did",
                 value = did,
                 path = "/",
-                domain = "xiaoka.tv",
+                domain = "xx.com",
                 --secure = true, --https 才会使用
                 httponly = true,
                 expires = _did_expiretime,
